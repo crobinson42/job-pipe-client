@@ -1,0 +1,15 @@
+main {
+  flex: 1;
+  margin: 10px; }
+
+.sidebar {
+  flex: 0 0 230px;
+  height: 100%; }
+  .sidebar > li {
+    list-style-type: none;
+    padding: 10px; }
+    .sidebar > li:hover {
+      cursor: pointer;
+      border-bottom: 1px solid lightgray;
+      border-right: 1px solid lightgray;
+      border-top: 1px solid lightgray; }

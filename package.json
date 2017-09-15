@@ -1,0 +1,41 @@
+{
+  "name": "react-project",
+  "version": "0.1.0",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "history": "^4.7.2",
+    "lodash-es": "^4.17.4",
+    "npm-run-all": "^4.1.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-loading": "^0.1.4",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-axios-middleware": "^4.0.0",
+    "redux-form": "^7.0.4",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "build": "npm-s build-css build-js",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-cra": "react-scripts start",
+    "start": "npm-run-all -p start-cra watch-css",
+    "build-js": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.3.0",
+    "node-sass-chokidar": "^0.0.3",
+    "prettier": "^1.6.1",
+    "stylelint": "^8.1.1",
+    "stylelint-config-standard": "^17.0.0"
+  }
+}
