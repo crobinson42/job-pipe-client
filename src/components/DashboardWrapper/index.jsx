@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Navbar from './Navbar'
-import Sidebar from './Sidebar'
 import './index.css'
 
 const DashboardWrapper = ({ children }) => (
@@ -11,11 +10,7 @@ const DashboardWrapper = ({ children }) => (
       <Navbar />
     </div>
 
-    <div className="d-flex">
-      <Sidebar />
-
-      <main>{children}</main>
-    </div>
+    <main>{children}</main>
   </div>
 )
 

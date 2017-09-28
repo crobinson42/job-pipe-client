@@ -6,14 +6,24 @@ import asyncComponent from 'components/AsyncComponent/index'
 // import AuthenticatedRoutes from './AuthenticatedRoutes'
 import DashboardPageWrapper from 'components/DashboardWrapper'
 
+const CreatePosting = asyncComponent(() => import('pages/CreatePosting'))
+const Posting = asyncComponent(() => import('pages/CreatePosting'))
+const Postings = asyncComponent(() => import('pages/Postings'))
+const Applicants = asyncComponent(() => import('pages/Applicants'))
 const Dashboard = asyncComponent(() => import('pages/Dashboard'))
-const Settings = asyncComponent(() => import('pages/Settings'))
+const AccountSettings = asyncComponent(() => import('pages/AccountSettings'))
+const UserSettings = asyncComponent(() => import('pages/UserSettings'))
 
 const DashboardRoutes = () => (
   <DashboardPageWrapper>
     <Switch>
       <Route exact path="/dashboard" component={Dashboard} />
-      <Route path="/dashboard/settings" component={Settings} />
+      <Route exact path="/dashboard/postings" component={Postings} />
+      <Route exact path="/dashboard/postings/create" component={CreatePosting} />
+      <Route path="/dashboard/postings/:id" component={Posting} />
+      <Route exact path="/dashboard/applicants" component={Applicants} />
+      <Route path="/dashboard/settings/account" component={AccountSettings} />
+      <Route path="/dashboard/settings/user" component={UserSettings} />
     </Switch>
   </DashboardPageWrapper>
 )

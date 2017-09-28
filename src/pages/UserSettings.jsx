@@ -6,16 +6,14 @@ import React, { Component } from 'react'
 // @withRouter
 // @connect(state => ({}),
 //   {})
-class Settings extends Component {
+class UserSettings extends Component {
   static propTypes = {}
 
   // static defaultProps = {}
 
-  render () {
-    return (
-      <div>Settings</div>
-    )
+  render() {
+    return <div>User Settings</div>
   }
 }
 
-export default Settings
+export default UserSettings
