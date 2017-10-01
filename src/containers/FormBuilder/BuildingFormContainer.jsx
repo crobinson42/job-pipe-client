@@ -7,7 +7,6 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import DraggableElement from './DraggableElement'
 import DropTarget from './DropTarget'
 import EditableElementControls from './EditableElementControls'
-import Modal from 'components/Modal'
 
 class BuildingFormContainer extends Component {
   static propTypes = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 const CheckboxEdit = ({ element: { id, fieldLabel }, fieldChangeHandler }) => (
   <div className="form-group">

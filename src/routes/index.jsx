@@ -7,6 +7,7 @@ import DashboardRoutes from './DashboardRoutes'
 
 const Home = asyncComponent(() => import('pages/Home'))
 const Login = asyncComponent(() => import('pages/Login'))
+const Register = asyncComponent(() => import('pages/Register'))
 // const Logout = asyncComponent(() => import('pages/Logout'))
 
 export const history = createBrowserHistory()
@@ -21,6 +22,7 @@ export default () => (
       </Route>
 
       <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
     </Switch>
   </Router>
 )
