@@ -8,6 +8,4 @@ export const services = {
   users: feathers.service('users'),
 }
 
-window.service = services
-
 export default services

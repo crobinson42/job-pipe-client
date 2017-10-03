@@ -4,8 +4,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
+import ReactLoading from 'react-loading'
 
 import service from 'feathers/services'
+import { authenticate } from 'containers/Auth/actions'
+import RenderFieldError from '../components/Form/FieldError'
 
 const containerStyle = {
   height: '100vh',
@@ -16,15 +19,22 @@ const containerStyle = {
 
 class Register extends Component {
   static propTypes = {
+    accessToken: PropTypes.string,
+    authenticate: PropTypes.func.isRequired,
     form: PropTypes.shape({
       fields: PropTypes.object,
       submitErrors: PropTypes.object,
       syncErrors: PropTypes.object,
     }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    user: PropTypes.object,
   }
 
-  // static defaultProps = {}
+  static defaultProps = {
+    accessToken: null,
+    user: null,
+  }
 
   static validation(values) {
     const errors = {}
@@ -54,6 +64,16 @@ class Register extends Component {
     return errors
   }
 
+  state = {
+    loading: false,
+  }
+
+  componentDidUpdate() {
+    if (this.props.user && this.props.accessToken) {
+      this.props.history.push('/dashboard')
+    }
+  }
+
   submitRegistrationForm = ({
     email,
     firstName,
@@ -61,6 +81,10 @@ class Register extends Component {
     organizationName: name,
     password,
   }) => {
+    this.setState({
+      loading: true,
+    })
+
     // restructure the data before sending to backend
     const data = {
       organization: {
@@ -76,42 +100,28 @@ class Register extends Component {
 
     return service.registration
       .create(data)
-      .then(res => {
-        console.log('socket response', res)
+      .then(() => {
+        this.props.authenticate({
+          email: data.user.email,
+          password: data.user.password,
+        })
       })
       .catch(({ errors }) => {
-        console.log('errors', errors)
+        this.setState({
+          loading: false,
+        })
+
         if (errors.email) {
           throw new SubmissionError({ email: 'Email address taken' })
         }
       })
   }
 
-  renderError = field => {
-    const { fields, submitErrors, syncErrors: errors } = this.props.form
-
-    if (
-      (fields &&
-        fields[field] &&
-        fields[field].touched &&
-        errors &&
-        errors[field]) ||
-      (submitErrors && submitErrors[field])
-    ) {
-      return (
-        <div className="col-md-3">
-          <div className="form-control-feedback">
-            <span className="text-danger align-middle">
-              {(errors && errors[field]) ||
-                (submitErrors && submitErrors[field])}
-            </span>
-          </div>
-        </div>
-      )
-    }
-
-    return null
-  }
+  renderError = field => (
+    <div className="col-md-3">
+      <RenderFieldError field={field} form={this.props.form} />
+    </div>
+  )
 
   render() {
     return (
@@ -308,8 +318,24 @@ class Register extends Component {
                 <div className="row">
                   <div className="col-md-3" />
                   <div className="col-md-6">
-                    <button type="submit" className="btn btn-success">
-                      <i className="fa fa-user-plus" /> Register
+                    <button
+                      disabled={this.state.loading}
+                      type="submit"
+                      className="btn btn-outline-success"
+                    >
+                      {this.state.loading ? (
+                        <ReactLoading
+                          color="white"
+                          delay={0}
+                          height="25px"
+                          type="bubbles"
+                          width="25px"
+                        />
+                      ) : (
+                        <span>
+                          <i className="fa fa-user-plus" /> Register
+                        </span>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -327,9 +353,11 @@ const enhance = compose(
   reduxForm({ form: 'register', validate: Register.validation }),
   connect(
     state => ({
+      accessToken: state.auth.accessToken,
       form: state.form.register,
+      user: state.user,
     }),
-    {},
+    { authenticate },
   ),
 )
 

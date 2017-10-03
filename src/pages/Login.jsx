@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import AuthForm from 'components/AuthForm'
+import LoginForm from 'containers/Auth/Login'
 
 const containerStyle = {
   height: '100vh',
@@ -12,13 +12,15 @@ const containerStyle = {
   alignItems: 'center',
 }
 
-// @withRouter
-// @connect(state => ({}),
-//   {})
 class Login extends Component {
-  static propTypes = {}
+  static propTypes = {
+    authed: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
+  }
 
-  // static defaultProps = {}
+  componentDidUpdate() {
+    if (this.props.authed) this.props.history.push('/dashboard')
+  }
 
   render() {
     return (
@@ -28,7 +30,7 @@ class Login extends Component {
             <div className="card-body">
               <h4 className="card-title text-center">Login</h4>
 
-              <AuthForm />
+              <LoginForm />
             </div>
           </div>
         </div>
@@ -37,4 +39,6 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(
+  connect(state => ({ authed: !!state.auth.accessToken }))(Login),
+)
