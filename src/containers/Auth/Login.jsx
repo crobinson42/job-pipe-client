@@ -14,6 +14,7 @@ class Login extends Component {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    successHandler: PropTypes.func.isRequired,
   }
 
   // static defaultProps = {}
@@ -41,7 +42,7 @@ class Login extends Component {
     })
 
     return authenticate(values)(this.props.dispatch)
-      .then(res => console.log(res))
+      .then(() => this.props.successHandler())
       .catch(err => {
         this.setState({
           failedAttempt: true,

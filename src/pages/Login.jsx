@@ -19,10 +19,13 @@ class Login extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.authed) this.props.history.push('/dashboard')
+    if (this.props.authed) this.redirect()
   }
 
+  redirect = () => this.props.history.push('/dashboard')
+
   render() {
+    console.log('here')
     return (
       <div className="container-fluid" style={containerStyle}>
         <div className="col-md-4 col-sm-10">
@@ -30,7 +33,7 @@ class Login extends Component {
             <div className="card-body">
               <h4 className="card-title text-center">Login</h4>
 
-              <LoginForm />
+              <LoginForm successHandler={this.redirect} />
             </div>
           </div>
         </div>

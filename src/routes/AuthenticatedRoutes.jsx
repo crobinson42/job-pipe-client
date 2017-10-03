@@ -6,10 +6,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
-class Authenticated extends Component {
+class AuthenticatedRoute extends Component {
   static propTypes = {
     accessToken: PropTypes.string,
     children: PropTypes.node,
@@ -22,7 +23,7 @@ class Authenticated extends Component {
     redirect: '/login',
   }
 
-  isUserAuthed = () => (!!this.props.accessToken)
+  isUserAuthed = () => !!this.props.accessToken
 
   renderRedirect = (pathname = '/login') => (
     <Redirect
@@ -38,12 +39,13 @@ class Authenticated extends Component {
       return this.renderRedirect()
     }
 
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    )
+    return <div>{this.props.children}</div>
   }
 }
 
-export default connect(state => ({ accessToken: state.auth.accessToken }))(Authenticated)
+const enhance = compose(
+  withRouter,
+  connect(state => ({ accessToken: state.auth.accessToken })),
+)
+
+export default enhance(AuthenticatedRoute)

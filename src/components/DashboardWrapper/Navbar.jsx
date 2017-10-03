@@ -50,13 +50,30 @@ const Navbar = () => (
             href="http://example.com"
             id="navbarDropdownMenuLink"
           >
-            Settings
+            <i className="fa fa-cogs" />
           </a>
-          <div
-            className="dropdown-menu"
-          >
-            <a className="dropdown-item" onClick={() => history.push('/dashboard/settings/account')}>Account</a>
-            <a className="dropdown-item" onClick={() => history.push('/dashboard/settings/user')}>Users</a>
+          <div className="dropdown-menu">
+            <a
+              className="dropdown-item"
+              onClick={() => history.push('/dashboard/settings/account')}
+            >
+              Account
+            </a>
+            <a
+              className="dropdown-item"
+              onClick={() => history.push('/dashboard/settings/user')}
+            >
+              Users
+            </a>
+            <span className="dropdown-item">
+              <hr />
+            </span>
+            <a
+              className="dropdown-item"
+              onClick={() => history.push('/logout')}
+            >
+              <i className="fa fa-sign-out" /> Logout
+            </a>
           </div>
         </li>
       </ul>
