@@ -24,9 +24,9 @@ class Dashboard extends Component {
           <div className="col-md-6 col-lg-4 mt-3">
             <Card flushWidth title="Recent">
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
               </ul>
             </Card>
           </div>
@@ -34,9 +34,9 @@ class Dashboard extends Component {
           <div className="col-md-6 col-lg-4 mt-3">
             <Card flushWidth title="Flagged">
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
               </ul>
             </Card>
           </div>
@@ -44,15 +44,17 @@ class Dashboard extends Component {
           <div className="col-md-6 col-lg-4 mt-3">
             <Card flushWidth title="Active Postings">
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
+                <li className="list-group-item"><i>todo...</i></li>
               </ul>
             </Card>
           </div>
         </div>
 
         <div className="row">
+          <h5>todo: iterate orgs status list and make a column for each status</h5>
+
           <div className="col-lg-12 col-xl-10 mx-auto mt-3 justify-content-center">
             <Card flushWidth title="Pipeline">
               <div className="d-flex flex-row justify-content-around">

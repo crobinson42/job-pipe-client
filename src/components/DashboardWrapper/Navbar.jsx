@@ -65,9 +65,7 @@ const Navbar = () => (
             >
               Users
             </a>
-            <span className="dropdown-item">
-              <hr />
-            </span>
+            <div className="dropdown-divider" />
             <a
               className="dropdown-item"
               onClick={() => history.push('/logout')}
