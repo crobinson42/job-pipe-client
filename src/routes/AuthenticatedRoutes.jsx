@@ -6,25 +6,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-// @withRouter
-// @connect(state => ({
-//   user: state.user,
-// }))
 class Authenticated extends Component {
   static propTypes = {
+    accessToken: PropTypes.string,
     children: PropTypes.node,
     location: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
+    accessToken: null,
     children: null,
     redirect: '/login',
   }
 
-  isUserAuthed = () => (!!this.props.token)
+  isUserAuthed = () => (!!this.props.accessToken)
 
   renderRedirect = (pathname = '/login') => (
     <Redirect
@@ -48,4 +46,4 @@ class Authenticated extends Component {
   }
 }
 
-export default Authenticated
+export default connect(state => ({ accessToken: state.auth.accessToken }))(Authenticated)

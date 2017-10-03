@@ -30,17 +30,26 @@ class Login extends Component {
   }
 
   state = {
+    failedAttempt: false,
     loading: false,
   }
 
   submitHandler = values => {
     this.setState({
+      failedAttempt: false,
       loading: true,
     })
 
-    return authenticate(values)(this.props.dispatch).catch(err => {
-      throw new SubmissionError()
-    })
+    return authenticate(values)(this.props.dispatch)
+      .then(res => console.log(res))
+      .catch(err => {
+        this.setState({
+          failedAttempt: true,
+          loading: false,
+        })
+
+        throw new SubmissionError('failed')
+      })
   }
 
   render() {
@@ -79,7 +88,7 @@ class Login extends Component {
         </div>
 
         <div className="text-danger text-center">
-          {this.props.form.submitErrors && 'Failed attempt'}
+          {this.state.failedAttempt && 'Invalid login'}
         </div>
 
         <div className="p-2">
