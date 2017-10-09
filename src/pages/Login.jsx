@@ -25,7 +25,6 @@ class Login extends Component {
   redirect = () => this.props.history.push('/dashboard')
 
   render() {
-    console.log('here')
     return (
       <div className="container-fluid" style={containerStyle}>
         <div className="col-md-4 col-sm-10">
