@@ -1,7 +1,8 @@
-import { CLEAR_TOKEN, LOGOUT, AUTHENTICATION_SUCCESS } from './constants'
+import { CLEAR_TOKEN, LOGOUT, AUTHENTICATION_FAIL, AUTHENTICATION_SUCCESS } from './constants'
 
 const initialState = {
   accessToken: null,
+  isAuthenticating: true,
 }
 
 export default function auth(state = initialState, action) {
@@ -15,10 +16,13 @@ export default function auth(state = initialState, action) {
       }
     case LOGOUT:
       return initialState
+    case AUTHENTICATION_FAIL:
+      return { ...state, isAuthenticating: false }
     case AUTHENTICATION_SUCCESS:
       return {
         ...state,
         accessToken: action.payload.accessToken,
+        isAuthenticating: false,
       }
     default:
       return state

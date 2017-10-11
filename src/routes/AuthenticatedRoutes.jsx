@@ -14,6 +14,7 @@ class AuthenticatedRoute extends Component {
   static propTypes = {
     accessToken: PropTypes.string,
     children: PropTypes.node,
+    isAuthenticating: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
   }
 
@@ -35,7 +36,9 @@ class AuthenticatedRoute extends Component {
   )
 
   render() {
-    if (!this.isUserAuthed()) {
+    if (this.props.isAuthenticating) {
+      return (<div>Checking Access...</div>)
+    } else if (!this.isUserAuthed()) {
       return this.renderRedirect()
     }
 
@@ -45,7 +48,7 @@ class AuthenticatedRoute extends Component {
 
 const enhance = compose(
   withRouter,
-  connect(state => ({ accessToken: state.auth.accessToken })),
+  connect(state => ({ accessToken: state.auth.accessToken, isAuthenticating: state.auth.isAuthenticating })),
 )
 
 export default enhance(AuthenticatedRoute)

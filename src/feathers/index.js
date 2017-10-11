@@ -1,6 +1,6 @@
 /* globals io, feathers,  */
 import store from 'store'
-import { AUTHENTICATION_SUCCESS } from 'containers/Auth/constants'
+import { AUTHENTICATION_FAIL, AUTHENTICATION_SUCCESS } from 'containers/Auth/constants'
 
 let accessToken = null
 let socket = io
@@ -40,7 +40,13 @@ feathersClient.authenticate().then((response) => {
       },
     })
   })
-  .catch(() => console.info('Authentication needed'))
+  .catch(() => {
+    store.dispatch({
+      type: AUTHENTICATION_FAIL,
+    })
+
+    console.info('*****      Authentication Needed        *****')
+  })
 
 
 if (process.env.NODE_ENV !== 'production') {
