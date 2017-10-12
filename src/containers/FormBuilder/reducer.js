@@ -1,10 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import {
   ADD_ELEMENT,
+  CLEAR_FORMBUILDER,
   DELETE_ELEMENT,
   EDITING_ELEMENT,
   ELEMENT_DRAGGING,
   MOVE_ELEMENT_POSITION,
+  SET_CURRENT_FORMBUILDER,
   UPDATE_ELEMENT_FIELD,
 } from './constants'
 
@@ -39,6 +41,12 @@ export default function formBuilder(state = initialState, action) {
         },
       }
     }
+    case CLEAR_FORMBUILDER:
+      return {
+        ...initialState,
+        ...initialState.elementsPositionById,
+        ...initialState.elementsById,
+      }
     case DELETE_ELEMENT: {
       const newState = { ...state }
 
@@ -122,6 +130,11 @@ export default function formBuilder(state = initialState, action) {
 
       return newState
     }
+    case SET_CURRENT_FORMBUILDER:
+      return {
+        ...state,
+        ...action.payload,
+      }
     case UPDATE_ELEMENT_FIELD: {
       const { id, field, value } = action.payload
       const newState = { ...state }

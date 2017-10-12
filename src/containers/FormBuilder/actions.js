@@ -1,10 +1,11 @@
 import {
   ADD_ELEMENT,
+  CLEAR_FORMBUILDER,
   DELETE_ELEMENT,
   ELEMENT_DRAGGING,
   EDITING_ELEMENT,
   MOVE_ELEMENT_POSITION,
-  UPDATE_ELEMENT_FIELD,
+  UPDATE_ELEMENT_FIELD, SET_CURRENT_FORMBUILDER,
 } from './constants'
 import elementSchemas from 'components/InputElements/schemas'
 
@@ -14,7 +15,7 @@ export const addElement = type => (dispatch) => {
   const payload = {
     // deep clone
     ...JSON.parse(JSON.stringify(elementSchemas[type])),
-    id: Math.random(),
+    id: new Date().getTime(),
     parentId: 0,
   }
 
@@ -23,6 +24,8 @@ export const addElement = type => (dispatch) => {
     payload,
   })
 }
+
+export const clearFormBuilder = () => ({ type: CLEAR_FORMBUILDER })
 
 export const deleteElement = id => ({ type: DELETE_ELEMENT, payload: id })
 
@@ -62,6 +65,8 @@ export const moveElement = (id, parentId, position) => (dispatch, getState) => {
     payload,
   })
 }
+
+export const setCurrentFormBuilder = state => ({ type: SET_CURRENT_FORMBUILDER, payload: state })
 
 /**
  * Util method that updates a field - the params object is passed straight to payload for the reducer
